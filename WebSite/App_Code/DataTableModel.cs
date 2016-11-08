@@ -5,7 +5,7 @@ using System.Web;
 
 public class Stock
 {
-    public int ID;
+    public int StockID;
     public int SellerID;
     public int ModelID;
     public int Quantity;
@@ -42,7 +42,7 @@ public class SellerInfo
     public string Provience;
     public string City;
     public string Address;
-    public int Level;
+    public string Level;
     public int ParentSellerID;
 }
 public class Admin
