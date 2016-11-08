@@ -24,10 +24,11 @@ public class DAL_Admin
 
         Admin SelectResult = new Admin();
         if (dataSet.Tables["Admin"].Rows.Count == 0)
-            return null;
+            return null; 
         SelectResult.UserID = Int32.Parse(dataSet.Tables["Admin"].Rows[0]["UserID"].ToString());
         SelectResult.UserName = dataSet.Tables["Admin"].Rows[0]["UserName"].ToString();
         SelectResult.UserPassWordHash = dataSet.Tables["Admin"].Rows[0]["UserPassWordHash"].ToString();
+        SelectResult.PassWordSalt = dataSet.Tables["Admin"].Rows[0]["PassWordSalt"].ToString();
         return SelectResult;
     }
     public List<Admin> SelectAll()
@@ -72,10 +73,11 @@ public class DAL_Admin
     {
         string SQLServerConnectString = "Data Source=localhost;Initial Catalog=WebAPPDevDotNETFinnalTest;Integrated Security=True;Pooling=False";
         SqlConnection SQLConnection = new SqlConnection(SQLServerConnectString);
-        string SQLCommandText = "INSERT INTO [dbo].[Admin] ([UserName], [UserPassWordHash]) VALUES (@UserName, @UserPassWordHash)";
+        string SQLCommandText = "INSERT INTO [dbo].[Admin] ([UserName], [UserPassWordHash], [PassWordSalt]) VALUES (@UserName, @UserPassWordHash, @PassWordSalt)";
         SqlCommand SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
         SQLCommand.Parameters.Add(new SqlParameter("@UserName", admin.UserName));
         SQLCommand.Parameters.Add(new SqlParameter("@UserPassWordHash", admin.UserPassWordHash));
+        SQLCommand.Parameters.Add(new SqlParameter("@UserPassWordHash", admin.PassWordSalt));
         SQLConnection.Open();
         SQLCommand.ExecuteNonQuery();
         SQLConnection.Close();

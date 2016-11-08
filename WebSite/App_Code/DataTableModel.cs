@@ -33,6 +33,7 @@ public class SellerUser
     public string UserPassWordHash;
     public string Email;
     public string Phone;
+    public string PassWordSalt;
 }
 public class SellerInfo
 {
@@ -50,4 +51,5 @@ public class Admin
     public int UserID;
     public string UserName;
     public string UserPassWordHash;
+    public string PassWordSalt;
 }

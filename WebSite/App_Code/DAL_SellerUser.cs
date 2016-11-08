@@ -31,6 +31,7 @@ public class DAL_SellerUser
         SelectResult.Email = dataSet.Tables["SellerUser"].Rows[0]["Email"].ToString();
         SelectResult.UserName = dataSet.Tables["SellerUser"].Rows[0]["UserName"].ToString();
         SelectResult.UserPassWordHash = dataSet.Tables["SellerUser"].Rows[0]["UserPassWordHash"].ToString();
+        SelectResult.PassWordSalt = dataSet.Tables["SellerUser"].Rows[0]["PassWordSalt"].ToString();
         return SelectResult;
     }
     public List<SellerUser> SelectAll(SellerUser sellerUser)
@@ -81,13 +82,14 @@ public class DAL_SellerUser
     {
         string SQLServerConnectString = "Data Source=localhost;Initial Catalog=WebAPPDevDotNETFinnalTest;Integrated Security=True;Pooling=False";
         SqlConnection SQLConnection = new SqlConnection(SQLServerConnectString);
-        string SQLCommandText = "INSERT INTO [dbo].[SellerUser] ([SellerID], [Phone], [Email], [UserName], [UserPassWordHash]) VALUES (@SellerID, @Phone, @Email, @UserName, @UserPassWordHash)";
+        string SQLCommandText = "INSERT INTO [dbo].[SellerUser] ([SellerID], [Phone], [Email], [UserName], [UserPassWordHash], [PassWordSalt]) VALUES (@SellerID, @Phone, @Email, @UserName, @UserPassWordHash, @PassWordSalt)";
         SqlCommand SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
         SQLCommand.Parameters.Add(new SqlParameter("@SellerID", sellerUser.SellerID));
         SQLCommand.Parameters.Add(new SqlParameter("@Phone", sellerUser.Phone));
         SQLCommand.Parameters.Add(new SqlParameter("@Email", sellerUser.Email));
         SQLCommand.Parameters.Add(new SqlParameter("@UserName", sellerUser.UserName));
         SQLCommand.Parameters.Add(new SqlParameter("@UserPassWordHash", sellerUser.UserPassWordHash));
+        SQLCommand.Parameters.Add(new SqlParameter("@PassWordSalt", sellerUser.PassWordSalt));
         SQLConnection.Open();
         SQLCommand.ExecuteNonQuery();
         SQLConnection.Close();
