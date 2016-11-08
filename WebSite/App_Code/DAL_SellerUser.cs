@@ -23,6 +23,8 @@ public class DAL_SellerUser
         SQLConnection.Close();
 
         SellerUser SelectResult = new SellerUser();
+        if (dataSet.Tables["SellerUser"].Rows.Count == 0)
+            return null;
         SelectResult.UserID = Int32.Parse(dataSet.Tables["SellerUser"].Rows[0]["UserID"].ToString());
         SelectResult.SellerID = Int32.Parse(dataSet.Tables["SellerUser"].Rows[0]["SellerID"].ToString());
         SelectResult.Phone = dataSet.Tables["SellerUser"].Rows[0]["Phone"].ToString();

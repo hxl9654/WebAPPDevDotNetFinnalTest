@@ -23,6 +23,8 @@ public class DAL_Brand
         SQLConnection.Close();
 
         Brand SelectResult = new Brand();
+        if (dataSet.Tables["Brand"].Rows.Count == 0)
+            return null;
         SelectResult.BrandID = Int32.Parse(dataSet.Tables["Brand"].Rows[0]["BrandID"].ToString());
         SelectResult.BrandName = dataSet.Tables["Brand"].Rows[0]["BrandName"].ToString();
         SelectResult.ProductAddress = dataSet.Tables["Brand"].Rows[0]["ProductAddress"].ToString();

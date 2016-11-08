@@ -23,6 +23,8 @@ public class DAL_Admin
         SQLConnection.Close();
 
         Admin SelectResult = new Admin();
+        if (dataSet.Tables["Admin"].Rows.Count == 0)
+            return null;
         SelectResult.UserID = Int32.Parse(dataSet.Tables["Admin"].Rows[0]["UserID"].ToString());
         SelectResult.UserName = dataSet.Tables["Admin"].Rows[0]["UserName"].ToString();
         SelectResult.UserPassWordHash = dataSet.Tables["Admin"].Rows[0]["UserPassWordHash"].ToString();

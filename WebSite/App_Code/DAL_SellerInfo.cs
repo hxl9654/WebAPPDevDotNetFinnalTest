@@ -23,6 +23,8 @@ public class DAL_SellerInfo
         SQLConnection.Close();
 
         SellerInfo SelectResult = new SellerInfo();
+        if (dataSet.Tables["SellerInfo"].Rows.Count == 0)
+            return null;
         SelectResult.SellerID = Int32.Parse(dataSet.Tables["SellerInfo"].Rows[0]["SellerID"].ToString());
         SelectResult.ParentSellerID = Int32.Parse(dataSet.Tables["SellerInfo"].Rows[0]["ParentSellerID"].ToString());
         SelectResult.Level = dataSet.Tables["SellerInfo"].Rows[0]["Level"].ToString();

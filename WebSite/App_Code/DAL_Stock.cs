@@ -23,6 +23,8 @@ public class DAL_Stock
         SQLConnection.Close();
 
         Stock SelectResult = new Stock();
+        if (dataSet.Tables["Stock"].Rows.Count == 0)
+            return null;
         SelectResult.StockID = Int32.Parse(dataSet.Tables["Stock"].Rows[0]["StockID"].ToString());
         SelectResult.ModelID = Int32.Parse(dataSet.Tables["Stock"].Rows[0]["ModelID"].ToString());
         SelectResult.SellerID = Int32.Parse(dataSet.Tables["Stock"].Rows[0]["SellerID"].ToString());

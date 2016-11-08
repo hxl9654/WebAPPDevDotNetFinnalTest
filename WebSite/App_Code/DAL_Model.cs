@@ -23,6 +23,8 @@ public class DAL_Model
         SQLConnection.Close();
 
         Model SelectResult = new Model();
+        if (dataSet.Tables["Model"].Rows.Count == 0)
+            return null;
         SelectResult.ModelID = Int32.Parse(dataSet.Tables["Model"].Rows[0]["ModelID"].ToString());
         SelectResult.BrandID = Int32.Parse(dataSet.Tables["Model"].Rows[0]["BrandID"].ToString());
         SelectResult.ModelName = dataSet.Tables["Model"].Rows[0]["SellerID"].ToString();
