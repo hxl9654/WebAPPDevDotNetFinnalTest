@@ -23,11 +23,11 @@ public class DAL_Brand
         SQLConnection.Close();
 
         Brand SelectResult = new Brand();
-        if (dataSet.Tables["Brand"].Rows.Count == 0)
+        if (dataSet.Tables[0].Rows.Count == 0)
             return null;
-        SelectResult.BrandID = Int32.Parse(dataSet.Tables["Brand"].Rows[0]["BrandID"].ToString());
-        SelectResult.BrandName = dataSet.Tables["Brand"].Rows[0]["BrandName"].ToString();
-        SelectResult.ProductAddress = dataSet.Tables["Brand"].Rows[0]["ProductAddress"].ToString();
+        SelectResult.BrandID = Int32.Parse(dataSet.Tables[0].Rows[0]["BrandID"].ToString());
+        SelectResult.BrandName = dataSet.Tables[0].Rows[0]["BrandName"].ToString();
+        SelectResult.ProductAddress = dataSet.Tables[0].Rows[0]["ProductAddress"].ToString();
         return SelectResult;
     }
     public List<Brand> SelectAll()
@@ -45,12 +45,12 @@ public class DAL_Brand
         SQLConnection.Close();
 
         List<Brand> SelectResult = new List<Brand>();
-        for (int i = 0; i < dataSet.Tables["Brand"].Rows.Count; i++)
+        for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
         {
             Brand temp = new Brand();
-            temp.BrandID = Int32.Parse(dataSet.Tables["Brand"].Rows[i]["BrandID"].ToString());
-            temp.BrandName = dataSet.Tables["Brand"].Rows[i]["BrandName"].ToString();
-            temp.ProductAddress = dataSet.Tables["Brand"].Rows[i]["ProductAddress"].ToString();
+            temp.BrandID = Int32.Parse(dataSet.Tables[0].Rows[i]["BrandID"].ToString());
+            temp.BrandName = dataSet.Tables[0].Rows[i]["BrandName"].ToString();
+            temp.ProductAddress = dataSet.Tables[0].Rows[i]["ProductAddress"].ToString();
             SelectResult.Add(temp);
         }
         return SelectResult;
@@ -72,9 +72,8 @@ public class DAL_Brand
     {
         string SQLServerConnectString = "Data Source=localhost;Initial Catalog=WebAPPDevDotNETFinnalTest;Integrated Security=True;Pooling=False";
         SqlConnection SQLConnection = new SqlConnection(SQLServerConnectString);
-        string SQLCommandText = "INSERT INTO [dbo].[Brand] ([BrandID], [BrandName], [ProductAddress]) VALUES (@BrandID, @BrandName, @ProductAddress)";
+        string SQLCommandText = "INSERT INTO [dbo].[Brand] ([BrandName], [ProductAddress]) VALUES (@BrandName, @ProductAddress)";
         SqlCommand SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
-        SQLCommand.Parameters.Add(new SqlParameter("@BrandID", brand.BrandID));
         SQLCommand.Parameters.Add(new SqlParameter("@BrandName", brand.BrandName));
         SQLCommand.Parameters.Add(new SqlParameter("@ProductAddress", brand.ProductAddress));
         SQLConnection.Open();

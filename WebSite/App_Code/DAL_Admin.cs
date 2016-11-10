@@ -23,12 +23,12 @@ public class DAL_Admin
         SQLConnection.Close();
 
         Admin SelectResult = new Admin();
-        if (dataSet.Tables["Admin"].Rows.Count == 0)
+        if (dataSet.Tables[0].Rows.Count == 0)
             return null; 
-        SelectResult.UserID = Int32.Parse(dataSet.Tables["Admin"].Rows[0]["UserID"].ToString());
-        SelectResult.UserName = dataSet.Tables["Admin"].Rows[0]["UserName"].ToString();
-        SelectResult.UserPassWordHash = dataSet.Tables["Admin"].Rows[0]["UserPassWordHash"].ToString();
-        SelectResult.PassWordSalt = dataSet.Tables["Admin"].Rows[0]["PassWordSalt"].ToString();
+        SelectResult.UserID = Int32.Parse(dataSet.Tables[0].Rows[0]["UserID"].ToString());
+        SelectResult.UserName = dataSet.Tables[0].Rows[0]["UserName"].ToString();
+        SelectResult.UserPassWordHash = dataSet.Tables[0].Rows[0]["UserPassWordHash"].ToString();
+        SelectResult.PassWordSalt = dataSet.Tables[0].Rows[0]["PassWordSalt"].ToString();
         return SelectResult;
     }
     public List<Admin> SelectAll()
@@ -46,12 +46,12 @@ public class DAL_Admin
         SQLConnection.Close();
 
         List<Admin> SelectResult = new List<Admin>();
-        for (int i = 0; i < dataSet.Tables["Admin"].Rows.Count; i++)
+        for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
         {
             Admin temp = new Admin();
-            temp.UserID = Int32.Parse(dataSet.Tables["Admin"].Rows[i]["UserID"].ToString());
-            temp.UserName = dataSet.Tables["Admin"].Rows[i]["UserName"].ToString();
-            temp.UserPassWordHash = dataSet.Tables["Admin"].Rows[i]["UserPassWordHash"].ToString();
+            temp.UserID = Int32.Parse(dataSet.Tables[0].Rows[i]["UserID"].ToString());
+            temp.UserName = dataSet.Tables[0].Rows[i]["UserName"].ToString();
+            temp.UserPassWordHash = dataSet.Tables[0].Rows[i]["UserPassWordHash"].ToString();
             SelectResult.Add(temp);
         }
         return SelectResult;

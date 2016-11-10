@@ -7,14 +7,23 @@ using System.Web;
 
 public class DAL_SellerUser
 {
-    public SellerUser SelectOne(SellerUser sellerUser)
+    public SellerUser SelectOne(SellerUser sellerUser, int mode = 0)
     {
         string SQLServerConnectString = "Data Source=localhost;Initial Catalog=WebAPPDevDotNETFinnalTest;Integrated Security=True;Pooling=False";
         SqlConnection SQLConnection = new SqlConnection(SQLServerConnectString);
-        string SQLCommandText = "SELECT * FROM [dbo].[SellerUser] WHERE UserID=@UserID";
-        SqlCommand SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
-        SQLCommand.Parameters.Add(new SqlParameter("@UserID", sellerUser.UserID));
-
+        SqlCommand SQLCommand;
+        if (mode == 0)
+        {
+            string SQLCommandText = "SELECT * FROM [dbo].[SellerUser] WHERE UserID=@UserID";
+            SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
+            SQLCommand.Parameters.Add(new SqlParameter("@UserID", sellerUser.UserID));
+        }
+        else
+        {
+            string SQLCommandText = "SELECT * FROM [dbo].[SellerUser] WHERE UserName=@UserName";
+            SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
+            SQLCommand.Parameters.Add(new SqlParameter("@UserName", sellerUser.UserName));
+        }
         DataSet dataSet = new DataSet();
         SqlDataAdapter SQLDataAdapter = new SqlDataAdapter(SQLCommand);
 
@@ -23,15 +32,15 @@ public class DAL_SellerUser
         SQLConnection.Close();
 
         SellerUser SelectResult = new SellerUser();
-        if (dataSet.Tables["SellerUser"].Rows.Count == 0)
+        if (dataSet.Tables[0].Rows.Count == 0)
             return null;
-        SelectResult.UserID = Int32.Parse(dataSet.Tables["SellerUser"].Rows[0]["UserID"].ToString());
-        SelectResult.SellerID = Int32.Parse(dataSet.Tables["SellerUser"].Rows[0]["SellerID"].ToString());
-        SelectResult.Phone = dataSet.Tables["SellerUser"].Rows[0]["Phone"].ToString();
-        SelectResult.Email = dataSet.Tables["SellerUser"].Rows[0]["Email"].ToString();
-        SelectResult.UserName = dataSet.Tables["SellerUser"].Rows[0]["UserName"].ToString();
-        SelectResult.UserPassWordHash = dataSet.Tables["SellerUser"].Rows[0]["UserPassWordHash"].ToString();
-        SelectResult.PassWordSalt = dataSet.Tables["SellerUser"].Rows[0]["PassWordSalt"].ToString();
+        SelectResult.UserID = Int32.Parse(dataSet.Tables[0].Rows[0]["UserID"].ToString());
+        SelectResult.SellerID = Int32.Parse(dataSet.Tables[0].Rows[0]["SellerID"].ToString());
+        SelectResult.Phone = dataSet.Tables[0].Rows[0]["Phone"].ToString();
+        SelectResult.Email = dataSet.Tables[0].Rows[0]["Email"].ToString();
+        SelectResult.UserName = dataSet.Tables[0].Rows[0]["UserName"].ToString();
+        SelectResult.UserPassWordHash = dataSet.Tables[0].Rows[0]["UserPassWordHash"].ToString();
+        SelectResult.PassWordSalt = dataSet.Tables[0].Rows[0]["PassWordSalt"].ToString();
         return SelectResult;
     }
     public List<SellerUser> SelectAll(SellerUser sellerUser)
@@ -50,15 +59,15 @@ public class DAL_SellerUser
         SQLConnection.Close();
 
         List<SellerUser> SelectResult = new List<SellerUser>();
-        for (int i = 0; i < dataSet.Tables["SellerUser"].Rows.Count; i++)
+        for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
         {
             SellerUser temp = new SellerUser();
-            temp.UserID = Int32.Parse(dataSet.Tables["SellerUser"].Rows[i]["UserID"].ToString());
-            temp.SellerID = Int32.Parse(dataSet.Tables["SellerUser"].Rows[i]["SellerID"].ToString());
-            temp.Phone = dataSet.Tables["SellerUser"].Rows[i]["Phone"].ToString();
-            temp.Email = dataSet.Tables["SellerUser"].Rows[i]["Email"].ToString();
-            temp.UserName = dataSet.Tables["SellerUser"].Rows[i]["UserName"].ToString();
-            temp.UserPassWordHash = dataSet.Tables["SellerUser"].Rows[i]["UserPassWordHash"].ToString();
+            temp.UserID = Int32.Parse(dataSet.Tables[0].Rows[i]["UserID"].ToString());
+            temp.SellerID = Int32.Parse(dataSet.Tables[0].Rows[i]["SellerID"].ToString());
+            temp.Phone = dataSet.Tables[0].Rows[i]["Phone"].ToString();
+            temp.Email = dataSet.Tables[0].Rows[i]["Email"].ToString();
+            temp.UserName = dataSet.Tables[0].Rows[i]["UserName"].ToString();
+            temp.UserPassWordHash = dataSet.Tables[0].Rows[i]["UserPassWordHash"].ToString();
             SelectResult.Add(temp);
         }
         return SelectResult;

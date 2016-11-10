@@ -23,14 +23,14 @@ public class DAL_Model
         SQLConnection.Close();
 
         Model SelectResult = new Model();
-        if (dataSet.Tables["Model"].Rows.Count == 0)
+        if (dataSet.Tables[0].Rows.Count == 0)
             return null;
-        SelectResult.ModelID = Int32.Parse(dataSet.Tables["Model"].Rows[0]["ModelID"].ToString());
-        SelectResult.BrandID = Int32.Parse(dataSet.Tables["Model"].Rows[0]["BrandID"].ToString());
-        SelectResult.ModelName = dataSet.Tables["Model"].Rows[0]["SellerID"].ToString();
-        SelectResult.Picture = dataSet.Tables["Model"].Rows[0]["Quantity"].ToString();
-        SelectResult.Color = dataSet.Tables["Model"].Rows[0]["SellerID"].ToString();
-        SelectResult.Info = dataSet.Tables["Model"].Rows[0]["Quantity"].ToString();
+        SelectResult.ModelID = Int32.Parse(dataSet.Tables[0].Rows[0]["ModelID"].ToString());
+        SelectResult.BrandID = Int32.Parse(dataSet.Tables[0].Rows[0]["BrandID"].ToString());
+        SelectResult.ModelName = dataSet.Tables[0].Rows[0]["ModelName"].ToString();
+        SelectResult.Picture = dataSet.Tables[0].Rows[0]["Picture"].ToString();
+        SelectResult.Color = dataSet.Tables[0].Rows[0]["Color"].ToString();
+        SelectResult.Info = dataSet.Tables[0].Rows[0]["Info"].ToString();
         return SelectResult;
     }
     public List<Model> SelectByBrandID(Model model)
@@ -49,20 +49,20 @@ public class DAL_Model
         SQLConnection.Close();
 
         List<Model> SelectResult = new List<Model>();
-        for (int i = 0; i < dataSet.Tables["Model"].Rows.Count; i++)
+        for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
         {
             Model temp = new Model();
-            temp.ModelID = Int32.Parse(dataSet.Tables["Model"].Rows[i]["ModelID"].ToString());
-            temp.BrandID = Int32.Parse(dataSet.Tables["Model"].Rows[i]["BrandID"].ToString());
-            temp.ModelName = dataSet.Tables["Model"].Rows[i]["SellerID"].ToString();
-            temp.Picture = dataSet.Tables["Model"].Rows[i]["Quantity"].ToString();
-            temp.Color = dataSet.Tables["Model"].Rows[i]["SellerID"].ToString();
-            temp.Info = dataSet.Tables["Model"].Rows[i]["Quantity"].ToString();
+            temp.ModelID = Int32.Parse(dataSet.Tables[0].Rows[i]["ModelID"].ToString());
+            temp.BrandID = Int32.Parse(dataSet.Tables[0].Rows[i]["BrandID"].ToString());
+            temp.ModelName = dataSet.Tables[0].Rows[i]["ModelName"].ToString();
+            temp.Picture = dataSet.Tables[0].Rows[i]["Picture"].ToString();
+            temp.Color = dataSet.Tables[0].Rows[i]["Color"].ToString();
+            temp.Info = dataSet.Tables[0].Rows[i]["Info"].ToString();
             SelectResult.Add(temp);
         }
         return SelectResult;
     }
-    public List<Model> SelectAll(Model model)
+    public List<Model> SelectAll()
     {
         string SQLServerConnectString = "Data Source=localhost;Initial Catalog=WebAPPDevDotNETFinnalTest;Integrated Security=True;Pooling=False";
         SqlConnection SQLConnection = new SqlConnection(SQLServerConnectString);
@@ -77,15 +77,15 @@ public class DAL_Model
         SQLConnection.Close();
 
         List<Model> SelectResult = new List<Model>();
-        for (int i = 0; i < dataSet.Tables["Model"].Rows.Count; i++)
+        for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
         {
             Model temp = new Model();
-            temp.ModelID = Int32.Parse(dataSet.Tables["Model"].Rows[i]["ModelID"].ToString());
-            temp.BrandID = Int32.Parse(dataSet.Tables["Model"].Rows[i]["BrandID"].ToString());
-            temp.ModelName = dataSet.Tables["Model"].Rows[i]["SellerID"].ToString();
-            temp.Picture = dataSet.Tables["Model"].Rows[i]["Quantity"].ToString();
-            temp.Color = dataSet.Tables["Model"].Rows[i]["SellerID"].ToString();
-            temp.Info = dataSet.Tables["Model"].Rows[i]["Quantity"].ToString();
+            temp.ModelID = Int32.Parse(dataSet.Tables[0].Rows[i]["ModelID"].ToString());
+            temp.BrandID = Int32.Parse(dataSet.Tables[0].Rows[i]["BrandID"].ToString());
+            temp.ModelName = dataSet.Tables[0].Rows[i]["ModelName"].ToString();
+            temp.Picture = dataSet.Tables[0].Rows[i]["Picture"].ToString();
+            temp.Color = dataSet.Tables[0].Rows[i]["Color"].ToString();
+            temp.Info = dataSet.Tables[0].Rows[i]["Info"].ToString();
             SelectResult.Add(temp);
         }
         return SelectResult;
