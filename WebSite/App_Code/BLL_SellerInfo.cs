@@ -32,10 +32,10 @@ public class BLL_SellerInfo
         DAL_SellerInfo SellerInfoDAL = new DAL_SellerInfo();
         return SellerInfoDAL.SelectByParentSellerID(sellerInfo);
     }
-    public List<SellerInfo> SelectAll()
+    public List<SellerInfo> SelectAll(bool root = false)
     {
         DAL_SellerInfo SellerInfoDAL = new DAL_SellerInfo();
-        return SellerInfoDAL.SelectAll();
+        return SellerInfoDAL.SelectAll(root);
     }
     public void Delete(int SellerID)
     {

@@ -23,24 +23,34 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" defaultfocus="TextBoxUserName" defaultbutton="ButtonAdminLogin">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div>
-                    账号<asp:TextBox ID="TextBoxUserName" runat="server" ClientIDMode="Static"></asp:TextBox>
-                    <asp:CheckBox ID="CheckBoxRememberUserName" runat="server" Text="记住账号" />
+                    <span style="width: 55px; display: inline-block;">账号</span><span><asp:TextBox ID="TextBoxUserName" runat="server" ClientIDMode="Static" TabIndex="1"></asp:TextBox></span>
+                    <asp:CheckBox ID="CheckBoxRememberUserName" runat="server" Text="记住账号" TabIndex="6" />
                 </div>
                 <div>
-                    密码<asp:TextBox ID="TextBoxPassWord" runat="server" ClientIDMode="Static" TextMode="Password"></asp:TextBox>
+                    <span style="width: 55px; display: inline-block;">密码</span><span><asp:TextBox ID="TextBoxPassWord" runat="server" ClientIDMode="Static" TextMode="Password" TabIndex="2"></asp:TextBox></span>
                 </div>
                 <div>
-                    <asp:Label ID="LabelWrongPassWordSign" runat="server" Text=""></asp:Label>
+                    <span style="width: 50px; display: inline-block;">验证码</span>
+                    <span>
+                        <asp:TextBox ID="TextBoxCAPTCHA" runat="server" TabIndex="3"></asp:TextBox></span>
+                </div>
+
+                <div>
+                    <asp:ImageButton ID="ImageButtonCAPTCHA" runat="server" ImageUrl="./CAPTCHAPage.aspx" OnClick="ImageButtonCAPTCHA_Click" TabIndex="8" />
+                </div>
+
+                <div>
+                    <asp:Label ID="LabelWrongPassWordSign" runat="server" Text="" TabIndex="100"></asp:Label>
                     <asp:HiddenField ID="HiddenFieldTimeStamp" runat="server" />
                 </div>
                 <div>
-                    <asp:Button ID="ButtonAdminLogin" runat="server" Text="管理员登录" OnClientClick="OnLogin()" OnClick="ButtonAdminLogin_Click" />
-                    <asp:Button ID="ButtonSellerLogin" runat="server" Text="经销商登录" OnClientClick="OnLogin()" OnClick="ButtonSellerLogin_Click" />
+                    <asp:Button ID="ButtonAdminLogin" runat="server" Text="管理员登录" OnClientClick="OnLogin()" OnClick="ButtonAdminLogin_Click" TabIndex="4" />
+                    <asp:Button ID="ButtonSellerLogin" runat="server" Text="经销商登录" OnClientClick="OnLogin()" OnClick="ButtonSellerLogin_Click" TabIndex="5" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

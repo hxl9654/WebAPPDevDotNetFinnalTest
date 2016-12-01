@@ -31,8 +31,14 @@ public partial class Login : System.Web.UI.Page
             Response.Cookies["UserName"].Expires = DateTime.Now.AddYears(1);
         }
         else Response.Cookies["UserName"].Expires = DateTime.Now.AddYears(-1);
-        if (TextBoxUserName.Text != null && TextBoxPassWord.Text != null && HiddenFieldTimeStamp.Value != null)
+        if (TextBoxUserName.Text != null && TextBoxPassWord.Text != null && HiddenFieldTimeStamp.Value != null && TextBoxCAPTCHA.Text != null)
         {
+            if (!TextBoxCAPTCHA.Text.ToLower().Equals(Session["CAPTCHA"].ToString().ToLower()))
+            {
+                LabelWrongPassWordSign.Text = "验证码错误，请重新输入";
+                return;
+            }
+            else LabelWrongPassWordSign.Text = "";
             Admin admin = (new BLL_Admin()).Login(TextBoxUserName.Text, TextBoxPassWord.Text, Int64.Parse(HiddenFieldTimeStamp.Value));
             if (admin != null)
             {
@@ -43,12 +49,19 @@ public partial class Login : System.Web.UI.Page
             }
             else LabelWrongPassWordSign.Text = "密码错误，请重新输入";
         }
+        ImageButtonCAPTCHA.ImageUrl = ImageButtonCAPTCHA.ImageUrl + "?";
     }
 
     protected void ButtonSellerLogin_Click(object sender, EventArgs e)
     {
-        if (TextBoxUserName.Text != null && TextBoxPassWord.Text != null && HiddenFieldTimeStamp.Value != null)
+        if (TextBoxUserName.Text != null && TextBoxPassWord.Text != null && HiddenFieldTimeStamp.Value != null && TextBoxCAPTCHA.Text != null)
         {
+            if (!TextBoxCAPTCHA.Text.ToLower().Equals(Session["CAPTCHA"].ToString().ToLower()))
+            {
+                LabelWrongPassWordSign.Text = "验证码错误，请重新输入";
+                return;
+            }
+            else LabelWrongPassWordSign.Text = "";
             SellerUser sellerUser = (new BLL_SellerUser()).Login(TextBoxUserName.Text, TextBoxPassWord.Text, Int64.Parse(HiddenFieldTimeStamp.Value));
             if (sellerUser != null)
             {
@@ -61,5 +74,11 @@ public partial class Login : System.Web.UI.Page
             }
             else LabelWrongPassWordSign.Text = "密码错误，请重新输入";
         }
+        ImageButtonCAPTCHA.ImageUrl = ImageButtonCAPTCHA.ImageUrl + "?";
+    }
+
+    protected void ImageButtonCAPTCHA_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButtonCAPTCHA.ImageUrl = ImageButtonCAPTCHA.ImageUrl + "?";
     }
 }

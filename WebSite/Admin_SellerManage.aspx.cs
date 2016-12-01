@@ -75,7 +75,6 @@ public partial class Admin_SellerManage : System.Web.UI.Page
         GridView2.ShowFooter = false;
         GridView2.EditIndex = -1;
         ButtonInsert2.Visible = true;
-        //ButtonInsert.Visible = true;
         GridView2_FetchData();
     }
 
@@ -119,7 +118,7 @@ public partial class Admin_SellerManage : System.Web.UI.Page
 
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataTextField = "Name";
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataValueField = "SellerID";
-            (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataSource = (new BLL_SellerInfo()).SelectAll();
+            (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataSource = (new BLL_SellerInfo()).SelectAll(true);
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataBind();
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).Text = (e.Row.FindControl("TextBoxParentSellerID") as TextBox).Text;
         }
@@ -127,7 +126,7 @@ public partial class Admin_SellerManage : System.Web.UI.Page
         {
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataTextField = "Name";
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataValueField = "SellerID";
-            (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataSource = (new BLL_SellerInfo()).SelectAll();
+            (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataSource = (new BLL_SellerInfo()).SelectAll(true);
             (e.Row.FindControl("DropDownListParentSellerID") as DropDownList).DataBind();
         }
         if (e.Row.RowType == DataControlRowType.DataRow && GridView1.EditIndex == -1)

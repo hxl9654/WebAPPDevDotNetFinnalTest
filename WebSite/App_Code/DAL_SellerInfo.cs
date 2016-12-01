@@ -66,11 +66,13 @@ public class DAL_SellerInfo
         }
         return SelectResult;
     }
-    public List<SellerInfo> SelectAll()
+    public List<SellerInfo> SelectAll(bool root = false)
     {
         string SQLServerConnectString = "Data Source=localhost;Initial Catalog=WebAPPDevDotNETFinnalTest;Integrated Security=True;Pooling=False";
         SqlConnection SQLConnection = new SqlConnection(SQLServerConnectString);
-        string SQLCommandText = "SELECT * FROM [dbo].[SellerInfo] where SellerID!=0";
+        string SQLCommandText = "SELECT * FROM [dbo].[SellerInfo]";
+        if(!root)
+            SQLCommandText += "where SellerID != 0";
         SqlCommand SQLCommand = new SqlCommand(SQLCommandText, SQLConnection);
 
         DataSet dataSet = new DataSet();
